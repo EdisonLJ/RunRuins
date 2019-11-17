@@ -38,6 +38,7 @@ function preload ()
     this.load.image('ground', 'assets/platform.png');
     this.load.image('coin', 'assets/coin.png');
     this.load.image('bomb', 'assets/meteor.png');
+    this.load.image('spike', 'assets/spike.png');
     this.load.spritesheet('dude', 'assets/dude.png', { frameWidth: 32, frameHeight: 48 });
 }
 
@@ -58,6 +59,9 @@ function create ()
     platforms.create(350, 300, 'ground').setScale(1/2, 1).refreshBody();
     platforms.create(600, 330, 'ground').setScale(1/2, 1).refreshBody();
     platforms.create(300, 150, 'ground').refreshBody();
+
+    const spikes = this.physics.add.staticGroup();
+    spikes.create(150, 400, 'spike');
 
     // The player and its settings
     player = this.physics.add.sprite(100, 450, 'dude');
@@ -119,6 +123,7 @@ function create ()
     this.physics.add.overlap(player, coins, collectCoin, null, this);
 
     this.physics.add.collider(player, bombs, hitBomb, null, this);
+    this.physics.add.collider(player, spikes, hitBomb, null, this);
 }
 
 function update ()
