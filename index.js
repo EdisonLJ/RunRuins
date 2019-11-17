@@ -51,9 +51,10 @@ function create ()
     platforms.create(400, 568, 'ground').setScale(2).refreshBody();
 
     //  Now let's create some ledges
-    platforms.create(600, 400, 'ground');
-    platforms.create(50, 250, 'ground');
-    platforms.create(750, 220, 'ground');
+    platforms.create(200, 450, 'ground');
+    platforms.create(350, 300, 'ground').setScale(1/2, 1).refreshBody();
+    platforms.create(600, 330, 'ground').setScale(1/2, 1).refreshBody();
+    platforms.create(300, 150, 'ground').refreshBody();
 
     // The player and its settings
     player = this.physics.add.sprite(100, 450, 'dude');
