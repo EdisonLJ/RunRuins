@@ -11,6 +11,9 @@ var config = {
             debug: false
         }
     },
+    input: {
+        gamepad: true
+    },
     scene: {
         preload: preload,
         create: create,
@@ -125,13 +128,29 @@ function update ()
         return;
     }
 
-    if (cursors.left.isDown)
+    let padLeft = false;
+    let padRight = false;
+    let padUp = false;
+    for (const pad of this.input.gamepad.gamepads)
+    {
+        if (pad.left || pad.leftStick.x < -0.5) {
+            padLeft = true;
+        }
+        if (pad.right || pad.leftStick.x > 0.5) {
+            padRight = true;
+        }
+        if (pad.up || pad.buttons.some(b => b.pressed)) {
+            padUp = true;
+        }
+    }
+
+    if (padLeft || cursors.left.isDown)
     {
         player.setVelocityX(-160);
 
         player.anims.play('left', true);
     }
-    else if (cursors.right.isDown)
+    else if (padRight || cursors.right.isDown)
     {
         player.setVelocityX(160);
 
@@ -144,7 +163,7 @@ function update ()
         player.anims.play('turn');
     }
 
-    if (cursors.up.isDown && player.body.touching.down)
+    if ((padUp || cursors.up.isDown) && player.body.touching.down)
     {
         player.setVelocityY(-330);
     }
