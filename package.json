@@ -1,0 +1,17 @@
+{
+  "name": "run-ruins",
+  "version": "1.0.0",
+  "description": "Edisons spel",
+  "license": "UNLICENSED",
+  "scripts": {
+    "test": "prettier --check *.js",
+    "prettier": "prettier --write *.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/EdisonLJ/RunRuins.git"
+  },
+  "devDependencies": {
+    "prettier": "1.19.1"
+  }
+}
