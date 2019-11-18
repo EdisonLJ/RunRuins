@@ -18,6 +18,9 @@ var config = {
     preload: preload,
     create: create,
     update: update
+  },
+  audio: {
+    disableWebAudio: true
   }
 };
 
@@ -29,6 +32,7 @@ var cursors;
 var score = 0;
 var gameOver = false;
 var scoreText;
+var music;
 
 var game = new Phaser.Game(config);
 
@@ -42,6 +46,7 @@ function preload() {
     frameWidth: 32,
     frameHeight: 48
   });
+  this.load.audio("guitar", ["assets/guitar.opus"]);
 }
 
 function create() {
@@ -135,11 +140,18 @@ function create() {
 
   this.physics.add.collider(player, bombs, hitBomb, null, this);
   this.physics.add.collider(player, spikes, hitBomb, null, this);
+
+  music = this.sound.add("guitar");
 }
 
 function update() {
   if (gameOver) {
     return;
+  }
+
+  // TODO: spela när man trycker på en knapp
+  if (!music.isPlaying) {
+    music.play();
   }
 
   let padLeft = false;
